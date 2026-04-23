@@ -86,6 +86,8 @@ All workflows are provided in the `/workflows` folder and can be imported into a
 ## Screenshots
 
 (Add images from `/assets` here if needed)
+<img width="1920" height="1140" alt="ui png" src="https://github.com/user-attachments/assets/50cf4ad0-91d3-4f02-afdf-1393e03065a2" />
+
 
 ---
 
