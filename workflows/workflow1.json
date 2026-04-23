@@ -1,1 +1,136 @@
-{}
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "36a21553-4f4d-4f67-bde9-a5cd9897c600",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -400,
+        0
+      ],
+      "id": "bd2a348e-c2c8-4477-8d67-e0629c2ec1c8",
+      "name": "Webhook",
+      "webhookId": "36a21553-4f4d-4f67-bde9-a5cd9897c600"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get row(s) in sheet').item.json['E-mail'] }}",
+        "subject": "Feedback Form",
+        "emailType": "text",
+        "message": "=Hi {{ $('Get row(s) in sheet').item.json.Name }},\n\nThanks for using ComfyWear\n\nWe’re constantly working to improve your experience, and your feedback would really help us.\n\nIt’ll only take a few seconds:\n\n👉 https://forms.gle/jJw2UCoVDff8PDnQA\n\nYour responses are anonymous and directly help us make better decisions.\n\nThanks again for your time!\n\nBest regards,  \nTeam ComfyWear\n\n—\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        272,
+        0
+      ],
+      "id": "283e8b09-02ce-4d76-9f1c-d4df578fc80f",
+      "name": "Send a message",
+      "webhookId": "853233e1-ab80-42d7-88ca-68f829e9e902",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XcaTblZSVwx6sq7B",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "=1FmX1uOA5S6WrOlBm9ukrlTE4TvOwYta7H5_cOEr6jQo",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Sheet1",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "bc1a71e3-69f3-46a2-8449-98a4fcf87568",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mGA78OpMltp4LezL",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        48,
+        0
+      ],
+      "id": "d53a610f-0a64-4976-bcab-c38612295c0e",
+      "name": "Wait",
+      "webhookId": "41989311-9f92-4a53-9df3-e9abfd511842"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "af2be6e6-2c3d-4a37-a8e6-ac1e416ac417",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70a3cb849b8e995e08309d549b75cb773cfeeac0bc3e9adfa1ca607828f81b0c"
+  },
+  "id": "7c6W4BoTjDwopd2H",
+  "tags": []
+}
