@@ -1,1 +1,210 @@
-{}
+{
+  "name": "My workflow 3",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Here is customer feedback: {{ $json.Rating }}\n,{{ $json['Feedback and Insights for Improvement'] }},\n{{ $json['  What issue did you face?  '] }}",
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are a customer feedback analyst.\nAnalyze the feedback and generate a clean report.\nFormat:\nCustomer Feedback Report\n\nTotal Feedbacks: <number>\n\nOverall Sentiment: <Positive / Neutral / Negative>\n<one short reason>\n\nKey Themes:\n1. <theme>\n2. <theme>\n3. <theme>\n\nMost Common Issues:\n1. <issue>\n2. <issue>\n3. <issue>\n\nAction Plan:\n1. <recommendation>\n2. <recommendation>\n3. <recommendation>\n\nRules:\n- Use proper spacing\n- Keep it short and clear\n- Do not use symbols like * or **\n- Write like a human, not like an AI"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        512,
+        -48
+      ],
+      "id": "aa662dee-6412-483d-9e61-fbd21259059e",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": "llama-3.3-70b-versatile",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        592,
+        176
+      ],
+      "id": "68d1429a-e123-46f8-bada-cc7ff90c6a39",
+      "name": "Groq Chat Model1",
+      "credentials": {
+        "groqApi": {
+          "id": "boEg8QO7Gb2FNVP3",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "Rating"
+            },
+            {
+              "fieldToAggregate": "Feedback and Insights for Improvement"
+            },
+            {
+              "fieldToAggregate": "  What issue did you face?  "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -48
+      ],
+      "id": "c765cead-db67-462b-bdfe-04a9f6a40cd7",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1rmsnr5BU2HOUsmKegStgunUrvmP89FhMwRAx8DDQZhE/edit?resourcekey=&gid=57878654#gid=57878654",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Form responses 1",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Column 5"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        64,
+        -48
+      ],
+      "id": "4c5339f5-5b24-4bc0-80a2-1b12534bbce9",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "mGA78OpMltp4LezL",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"text\": $json[\"text\"] } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        864,
+        -48
+      ],
+      "id": "06258a13-ac1f-4a6c-ad1c-40d8a43a4e9c",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "632dfbac-0c59-45a4-9462-dafd9973bead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -160,
+        -48
+      ],
+      "id": "7b303662-5a66-439d-a832-67768560989c",
+      "name": "Webhook",
+      "webhookId": "632dfbac-0c59-45a4-9462-dafd9973bead"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "65731696-1d97-4476-8645-b5b0d9e9bc66",
+  "meta": {
+    "instanceId": "70a3cb849b8e995e08309d549b75cb773cfeeac0bc3e9adfa1ca607828f81b0c"
+  },
+  "id": "b5POqchIs9bDehJS",
+  "tags": []
+}
