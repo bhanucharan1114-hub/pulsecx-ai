@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Customer Intelligence Agent</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 12px;
+      width: 400px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background: #3b82f6;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #020617;
+      padding: 15px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      text-align: left;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Customer Intelligence Agent</h1>
+
+    <button onclick="startCampaign()">Start Campaign</button>
+    <button onclick="getInsights()">Generate Insights</button>
+
+    <div id="output">Insights will appear here...</div>
+  </div>
+
+  <script>
+    // 🔹 Replace with your actual webhook URLs
+    const CAMPAIGN_URL = "https://gopibhanucharan.app.n8n.cloud/webhook/36a21553-4f4d-4f67-bde9-a5cd9897c600";
+    const INSIGHTS_URL = "https://gopibhanucharan.app.n8n.cloud/webhook/632dfbac-0c59-45a4-9462-dafd9973bead";
+
+    async function startCampaign() {
+    const btn = event.target;
+    btn.disabled = true;
+    btn.innerText = "Starting...";
+
+    try {
+        // Fire request but DON'T wait for long response
+        fetch(CAMPAIGN_URL, {
+        method: "POST"
+        });
+
+        // Immediately respond in UI
+        alert("Campaign started successfully!");
+    } catch (err) {
+        alert("Error starting campaign");
+        console.error(err);
+    }
+
+    btn.disabled = false;
+    btn.innerText = "Start Campaign";
+    }
+
+    async function getInsights() {
+      const output = document.getElementById("output");
+      output.innerText = "Generating insights...";
+
+      try {
+        const res = await fetch(INSIGHTS_URL, {
+          method: "POST"
+        });
+
+        const data = await res.json();
+
+        output.innerText = data.text || JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.innerText = "Error fetching insights";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
