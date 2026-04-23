@@ -76,6 +76,12 @@ Due to free-tier limitations, the live instance may not always be available.
 All workflows are provided in the `/workflows` folder and can be imported into any n8n instance to reproduce the system.
 
 ---
+## Documents 
+
+Submission file : docs/PulseCX AI Project Documentation V2.pdf
+PPT : docs/PulseCX-AI.pdf
+
+----
 
 ## Demo
 
