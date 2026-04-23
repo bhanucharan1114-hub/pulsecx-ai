@@ -79,11 +79,8 @@ All workflows are provided in the `/workflows` folder and can be imported into a
 
 ## Demo
 
-(Add your demo video link here)
 
----
 
-## Screenshots
 ---
 
 ## Screenshots
