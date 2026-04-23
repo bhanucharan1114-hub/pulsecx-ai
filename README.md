@@ -84,15 +84,49 @@ All workflows are provided in the `/workflows` folder and can be imported into a
 ---
 
 ## Screenshots
-<img width="1292" height="314" alt="workflow1" src="https://github.com/user-attachments/assets/68a8282f-2928-446d-a779-4a165ec21a82" />
-<img width="1569" height="360" alt="workflow2" src="https://github.com/user-attachments/assets/f9cc74cc-3afb-472b-b9d7-7965f74a0fdf" />
-<img width="1594" height="451" alt="workflow3" src="https://github.com/user-attachments/assets/21ca7e13-63d2-4ddc-aa1a-0a67b2f3c15d" />
-<img width="1920" height="1140" alt="ui" src="https://github.com/user-attachments/assets/fb0208d9-b911-46b4-bb9e-c588fab57fef" />
-<img width="1920" height="1140" alt="ui_response" src="https://github.com/user-attachments/assets/1232ca91-3cee-4710-a967-5d627b2ee0a7" />
-<img width="636" height="762" alt="feedbackForm" src="https://github.com/user-attachments/assets/045615d9-b024-4f7e-9fad-ada20b37110c" />
-<img width="718" height="731" alt="AI_ANALYSIS_REPORT" src="https://github.com/user-attachments/assets/60dba1fc-c2d7-45eb-a703-13e5908adc80" />
-<img width="912" height="734" alt="ALERT_SYSTEM" src="https://github.com/user-attachments/assets/04621cb6-a7f8-443d-9d3a-b622b0a6a380" />
+---
 
+## Screenshots
+
+### 🔹 Workflow Architecture
+
+**Workflow 1 – Campaign Trigger**
+<img src="https://github.com/user-attachments/assets/68a8282f-2928-446d-a779-4a165ec21a82" width="100%"/>
+
+**Workflow 2 – Feedback Processing**
+<img src="https://github.com/user-attachments/assets/f9cc74cc-3afb-472b-b9d7-7965f74a0fdf" width="100%"/>
+
+**Workflow 3 – Insight Delivery**
+<img src="https://github.com/user-attachments/assets/21ca7e13-63d2-4ddc-aa1a-0a67b2f3c15d" width="100%"/>
+
+---
+
+### 🔹 User Interface
+
+**Dashboard**
+<img src="https://github.com/user-attachments/assets/fb0208d9-b911-46b4-bb9e-c588fab57fef" width="100%"/>
+
+**Generated Insights View**
+<img src="https://github.com/user-attachments/assets/1232ca91-3cee-4710-a967-5d627b2ee0a7" width="100%"/>
+
+---
+
+### 🔹 Data Collection
+
+**Feedback Form**
+<img src="https://github.com/user-attachments/assets/045615d9-b024-4f7e-9fad-ada20b37110c" width="60%"/>
+
+---
+
+### 🔹 AI Output
+
+**AI Analysis Report**
+<img src="https://github.com/user-attachments/assets/60dba1fc-c2d7-45eb-a703-13e5908adc80" width="60%"/>
+
+**Alert Detection System**
+<img src="https://github.com/user-attachments/assets/04621cb6-a7f8-443d-9d3a-b622b0a6a380" width="60%"/>
+
+---
 ---
 
 ## Impact
