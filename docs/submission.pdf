@@ -1,1 +1,45 @@
+Project Title: PulseCX AI
+Team Composition : 
+Bhanu Charan — Solo developer, responsible for workflow automation, AI integration, UI development, and system design.
+
+Problem Statement :
+Small teams and student startups receive customer feedback but struggle to extract meaningful insights from it. Without dedicated analytics resources, they are forced to manually read responses, making it difficult to identify recurring issues and take timely action.
+Solution Overview : 
+PulseCX AI is an AI-powered agent designed for student startups and small businesses to simplify customer feedback analysis. It automatically collects feedback, processes responses, and transforms them into clear, actionable insights without requiring a data team. 
+Instead of manually reviewing multiple responses, the system identifies key themes, detects common issues, and provides prioritized recommendations, helping teams quickly understand what matters most and what actions to take.
+
+Agent Architecture : 
+PulseCX AI follows a modular workflow-based architecture built to handle feedback collection, processing, and insight generation.
+
+Workflow 1: Campaign Trigger (Feedback Collection)
+The system is triggered through a webhook from the user interface. Customer email campaigns are initiated with a feedback form link. Responses are collected through a standardized form and stored in a connected data source.
+
+Workflow 2: Feedback Processing and Analysis
+A scheduled trigger periodically checks for new, unprocessed feedback entries. Relevant data is filtered and aggregated for analysis. The aggregated feedback is passed to a large language model for sentiment analysis, theme extraction, and issue detection. The system then generates structured insights and recommendations. If critical issues are detected, additional analysis is performed to suggest solutions. Processed entries are marked as completed to avoid duplication.
+
+Workflow 3: Insight Delivery (UI + API)
+The user interface triggers a webhook request to fetch insights. The system retrieves and aggregates processed feedback data. The language model generates a structured report, and the insights are returned instantly to the UI for display.
+
+
+Data Flow
+UI → Webhook → Campaign Trigger
+Feedback Form → Data Storage
+Scheduled Processing → Aggregation → LLM Analysis
+Insights + Recommendations
+UI Display / Email Delivery
+
+
+Decision Logic : 
+Threshold Check: Minimum feedback threshold ensures insights are generated only when enough data is available.
+Sentiment Priority: Conditional checks identify negative or critical patterns to prioritize focused recommendations.
+Efficiency: Only unprocessed entries are analyzed to prevent duplication.
+
+
+Tech Stack : 
+Workflow Automation: n8n
+Frontend (UI): HTML, CSS, JavaScript
+AI Model & Inference: Groq API (LLaMA 3.3 70B)
+Data Collection: Google Forms
+Data Storage & Processing: Google Sheets
+Integration Layer: Webhooks (API-based communication)
 
