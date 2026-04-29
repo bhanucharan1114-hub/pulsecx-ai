@@ -9,7 +9,7 @@ PulseCX AI is an AI-powered system that helps student startups and small busines
 
 Small teams collect customer feedback but struggle to extract meaningful insights from it. Without dedicated analytics resources, they are forced to manually read responses, making it difficult to identify recurring issues and take timely action.
 
----
+-----
 
 ##Solution
 
